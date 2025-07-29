@@ -125,11 +125,5 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 ---
 
-### Credits
-
-Supabase, FastAPI, React, Shadcn UI, Ollama (for deepseek llm), YouTube Data API.
-
----
-
 ### License
 © 2025 Suryavedha Pradhan. This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
