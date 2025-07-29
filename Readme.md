@@ -43,8 +43,11 @@ Prerequisites
 ```sh
 git clone https://github.com/Suryavedha99/SkillMint.git
 cd SkillMint
+```
 
 2. Environment Variables
+
+```sh
 Create .env files in both frontend/ and backend/ directories with the following keys:
 
 Frontend (frontend/.env):
@@ -56,8 +59,11 @@ SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 YOUTUBE_API_KEY=your_youtube_api_key
 LLM_URL=your_llm_endpoint_url
 LLM_MODEL=your_llm_model_name
+```
 
 3. Install Dependencies
+
+```sh
 Frontend:
 cd frontend
 npm install
@@ -65,8 +71,11 @@ npm install
 Backend:
 cd ../backend
 pip install -r requirements.txt
+```
 
 4. Run the App
+
+```sh
 Start Supabase (if using locally):
 supabase start
 
@@ -76,6 +85,7 @@ uvicorn backend.main:app --reload
 Frontend:
 cd frontend
 npm run dev
+```
 
 ### Folder Structure
 
@@ -95,21 +105,22 @@ SkillMint_Final/
 └── [Readme.md]
 
 
-Customization
+### Customization
+
 LLM Provider: You can configure any LLM endpoint by setting LLM_URL and LLM_MODEL in the backend .env.
 YouTube Filtering: Preferred channels and filtering logic can be adjusted in backend/services/youtube_service.py.
 Styling: Tweak Tailwind and Shadcn UI classes in the frontend for a custom look.
 
-Contributing
+### Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-License
+### License
 MIT
 
-Credits
+### Credits
 Supabase
 FastAPI
 React
 Shadcn UI
-OpenAI / Ollama (for LLMs)
+Ollama (for deepseek llm)
 YouTube Data API
