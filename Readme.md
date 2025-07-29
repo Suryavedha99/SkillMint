@@ -127,12 +127,7 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 ### Credits
 
-Supabase
-FastAPI
-React
-Shadcn UI
-Ollama (for deepseek llm)
-YouTube Data API
+Supabase, FastAPI, React, Shadcn UI, Ollama (for deepseek llm), YouTube Data API.
 
 ---
 
