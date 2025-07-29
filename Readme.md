@@ -132,4 +132,4 @@ Supabase, FastAPI, React, Shadcn UI, Ollama (for deepseek llm), YouTube Data API
 ---
 
 ### License
-MIT
+© 2025 Suryavedha Pradhan. This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
