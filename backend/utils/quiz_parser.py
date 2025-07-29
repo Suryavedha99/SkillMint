@@ -7,10 +7,11 @@ def parse_mcqs(text: str) -> List[Dict]:
     Extremely forgiving MCQ parser for LLM output.
     Handles:
     - Qx) or Qx: as question start (with or without question text)
-    - Options labeled A) to D) (any delimiter, any order)
+    - Options labeled A) to Z) (any delimiter, any order)
     - Answers as letter, letter+delimiter, or full text
     - Ignores <think> blocks and explanations
     - Recovers from missing or extra whitespace, dashes, etc.
+    - Accepts any number of options (minimum 2)
     """
     mcqs = []
     # Remove <think> blocks and explanations
@@ -26,14 +27,14 @@ def parse_mcqs(text: str) -> List[Dict]:
         question = re.sub(r"^Q\d+[\):]\s*", "", q_line)
         if not question:
             # Try to use the next line as question if first is empty
-            if len(lines) > 1 and not re.match(r"^[A-Da-d][\)\.:\-]", lines[1]):
+            if len(lines) > 1 and not re.match(r"^[A-Za-z][\)\.:\-]", lines[1]):
                 question = lines[1]
                 lines = [lines[0]] + lines[2:]
         options = {}
         answer = None
         # Parse options and answer
         for line in lines[1:]:
-            opt_match = re.match(r"^([A-Da-d])[\)\.:\-]?\s*(.*)$", line)
+            opt_match = re.match(r"^([A-Za-z])[\)\.:\-]?\s*(.*)$", line)
             if opt_match:
                 key = opt_match.group(1).upper()
                 val = opt_match.group(2).strip()
@@ -43,9 +44,9 @@ def parse_mcqs(text: str) -> List[Dict]:
             if ans_match:
                 raw_ans = ans_match.group(1).strip()
                 # Accept A, B, C, D, or full text
-                if re.fullmatch(r"[A-Da-d]", raw_ans):
+                if re.fullmatch(r"[A-Za-z]", raw_ans):
                     answer = raw_ans.upper()
-                elif re.match(r"^[A-Da-d][\)\.:\-]?", raw_ans):
+                elif re.match(r"^[A-Za-z][\)\.:\-]?", raw_ans):
                     answer = raw_ans[0].upper()
                 else:
                     # Try to match answer text to option (case-insensitive, partial match allowed)
@@ -59,15 +60,17 @@ def parse_mcqs(text: str) -> List[Dict]:
                 if 'correct' in v.lower() or 'right' in v.lower():
                     answer = k
                     break
-        # Only append if at least 2 options and an answer
+        # Accept any number of options >= 2
         if question and len(options) >= 2 and answer in options:
-            # Fill missing options with empty strings if needed
-            all_keys = ['A', 'B', 'C', 'D']
-            opts = [options.get(k, "") for k in all_keys]
+            # Preserve the order of options as they appear (A, B, C, ...)
+            sorted_keys = sorted(options.keys(), key=lambda x: ord(x))
+            opts = [options[k] for k in sorted_keys]
+            # Find the index of the answer
+            answer_text = options[answer]
             mcqs.append({
                 "question": question,
                 "options": opts,
-                "answer": options[answer]
+                "answer": answer_text
             })
     return mcqs
 
