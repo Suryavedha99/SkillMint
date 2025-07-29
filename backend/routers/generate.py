@@ -499,13 +499,47 @@ async def generate_full_course(request: Request):
             parsed_mcqs = robust_parse_mcqs(quiz_raw)
 
             mcqs = []
+            seen_questions = set()
             for idx, m in enumerate(parsed_mcqs):
                 try:
-                    mcq = MCQ(**m)
+                    # Ensure options is a list of 4 non-empty strings
+                    options = m.get("options", [])
+                    options = [opt for opt in options if isinstance(opt, str) and opt.strip()]
+                    if len(options) < 4:
+                        logger.warning(f"[Quiz Q{idx+1}] Skipped: fewer than 4 options")
+                        continue
+
+                    # Ensure question is unique and non-empty
+                    question_text = m.get("question", "").strip()
+                    if not question_text or question_text in seen_questions:
+                        logger.warning(f"[Quiz Q{idx+1}] Skipped: duplicate or empty question")
+                        continue
+                    seen_questions.add(question_text)
+
+                    # Ensure answer is present and matches one of the options
+                    answer = m.get("answer", "").strip()
+                    if not answer or answer not in options:
+                        logger.warning(f"[Quiz Q{idx+1}] Skipped: answer missing or not in options")
+                        continue
+
+                    mcq = MCQ(
+                        question=question_text,
+                        options=options,
+                        answer=answer
+                    )
                     mcqs.append(mcq)
                     logger.debug(f"[Quiz Q{idx+1}] {mcq.question} | Answer: {mcq.answer}")
                 except Exception as e:
                     logger.warning(f"[Quiz Q{idx+1}] Skipped due to parse error: {e}")
+
+            # Check if no valid MCQs were generated
+            if not mcqs:
+                logger.warning(f"[Quiz] No valid MCQs generated for lesson '{title}'. Adding placeholder.")
+                mcqs.append(MCQ(
+                    question="No valid quiz questions could be generated for this lesson.",
+                    options=["N/A", "N/A", "N/A", "N/A"],
+                    answer="N/A"
+                ))
 
             full_lessons.append(Lesson(
             id=str(uuid4()),
