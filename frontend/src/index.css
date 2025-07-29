@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* SkillMint Dark Theme Design System */
+    --background: 217 27% 8%;
+    --foreground: 220 13% 91%;
+
+    --card: 217 27% 12%;
+    --card-foreground: 220 13% 91%;
+
+    --popover: 217 27% 10%;
+    --popover-foreground: 220 13% 91%;
+
+    /* SkillMint Brand Colors - Mint Green Theme */
+    --primary: 165 84% 65%;
+    --primary-foreground: 217 27% 8%;
+    --primary-glow: 170 89% 78%;
+
+    --secondary: 217 27% 16%;
+    --secondary-foreground: 220 13% 91%;
+
+    --muted: 217 27% 14%;
+    --muted-foreground: 217 13% 65%;
+
+    --accent: 170 89% 78%;
+    --accent-foreground: 217 27% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 13% 91%;
+
+    --border: 217 27% 20%;
+    --input: 217 27% 16%;
+    --ring: 165 84% 65%;
+
+    --radius: 0.75rem;
+
+    /* Custom SkillMint Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 220 13% 91%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 217 27% 8%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(165 84% 65%), hsl(170 89% 78%));
+    --gradient-card: linear-gradient(135deg, hsl(217 27% 12%), hsl(217 27% 15%));
+    
+    /* Shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(165 84% 65% / 0.3);
+    --shadow-card: 0 4px 20px hsl(217 27% 4% / 0.4);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 217 27% 10%;
+    --sidebar-foreground: 220 13% 91%;
+    --sidebar-primary: 165 84% 65%;
+    --sidebar-primary-foreground: 217 27% 8%;
+    --sidebar-accent: 217 27% 16%;
+    --sidebar-accent-foreground: 220 13% 91%;
+    --sidebar-border: 217 27% 20%;
+    --sidebar-ring: 165 84% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom utilities for SkillMint */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+.prose hr {
+  margin-top: 2.5rem !important;
+  margin-bottom: 2.5rem !important;
+}
