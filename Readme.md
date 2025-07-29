@@ -36,6 +36,8 @@ Prerequisites
 - YouTube Data API key
 - LLM endpoint (OpenAI, Ollama, etc.)
 
+---
+
 ### Setup
 
 1. Clone the repository
@@ -87,8 +89,11 @@ cd frontend
 npm run dev
 ```
 
+---
+
 ### Folder Structure
 
+```sh
 SkillMint_Final/
 ├── backend/
 │   ├── routers/
@@ -104,6 +109,8 @@ SkillMint_Final/
 │   └── public/
 └── [Readme.md]
 
+```
+---
 
 ### Customization
 
@@ -114,13 +121,13 @@ Styling: Tweak Tailwind and Shadcn UI classes in the frontend for a custom look.
 ### Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
+### Credits
+-Supabase
+-FastAPI
+-React
+-Shadcn UI
+-Ollama (for deepseek llm)
+-YouTube Data API
+
 ### License
 MIT
-
-### Credits
-Supabase
-FastAPI
-React
-Shadcn UI
-Ollama (for deepseek llm)
-YouTube Data API
