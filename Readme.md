@@ -118,16 +118,23 @@ LLM Provider: You can configure any LLM endpoint by setting LLM_URL and LLM_MODE
 YouTube Filtering: Preferred channels and filtering logic can be adjusted in backend/services/youtube_service.py.
 Styling: Tweak Tailwind and Shadcn UI classes in the frontend for a custom look.
 
+---
+
 ### Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
+---
+
 ### Credits
--Supabase
--FastAPI
--React
--Shadcn UI
--Ollama (for deepseek llm)
--YouTube Data API
+
+Supabase
+FastAPI
+React
+Shadcn UI
+Ollama (for deepseek llm)
+YouTube Data API
+
+---
 
 ### License
 MIT
